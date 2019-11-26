@@ -12,6 +12,7 @@
         "MessageProcessingQueue": {
             "Type": "AWS::SQS::Queue",
             "Properties": {
+                "QueueName" : "MessageProcessingQueue"
             }
         },
         "SampleStackVpc" : {
@@ -26,7 +27,7 @@
         "SubnetA" : {
             "Type" : "AWS::EC2::Subnet",
             "Properties" : {
-                "AvailabilityZone" : "eu-west-1a",
+                "AvailabilityZone" : "ap-northeast-1a",
                 "VpcId" : { "Ref" : "SampleStackVpc" },
                 "CidrBlock" : "10.0.0.0/24"
             }
@@ -34,7 +35,7 @@
         "SubnetB" : {
             "Type" : "AWS::EC2::Subnet",
             "Properties" : {
-                "AvailabilityZone" : "eu-west-1b",
+                "AvailabilityZone" : "ap-northeast-1c",
                 "VpcId" : { "Ref" : "SampleStackVpc" },
                 "CidrBlock" : "10.0.1.0/24"
             }
@@ -215,6 +216,7 @@
         "RdsInstance": {
             "Type": "AWS::RDS::DBInstance",
             "Properties": {
+                "DBInstanceIdentifier" : "RdsInstance",
                 "AllocatedStorage": "5",
                 "AvailabilityZone": { "Fn::GetAtt" : [ "SubnetA", "AvailabilityZone" ] } ,
                 "DBInstanceClass": "db.t2.micro",
@@ -235,9 +237,9 @@
                 "IamInstanceProfile": {
                     "Ref": "ApplicationInstanceProfile"
                 },
-                "ImageId": "ami-6e7bd919",
+                "ImageId": "ami-0ab3e16f9c414dee7",
                 "InstanceType": "t2.micro",
-                "KeyName": "eu-west-1",
+                "KeyName": "kihong-public",
                 "NetworkInterfaces" : [ {
                    "AssociatePublicIpAddress" : true,
                    "DeviceIndex" : "0",
@@ -259,8 +261,8 @@
         "Route53Domain": {
             "Type": "AWS::Route53::RecordSet",
             "Properties": {
-                "HostedZoneName": "elasticspring.org.",
-                "Name": "refapp.elasticspring.org.",
+                "HostedZoneName": "kkh-study.net.",
+                "Name": "refapp.kkh-study.net.",
                 "Type": "A",
                 "TTL" : "300",
                 "ResourceRecords" : [
@@ -272,6 +274,7 @@
             "Type": "AWS::SNS::Topic",
             "DependsOn" : "SpringBootServer",
             "Properties": {
+                "TopicName" : "SnsTopic",
                 "Subscription": [
                     {
                         "Endpoint": { "Fn::Join" : ["",[
@@ -301,6 +304,7 @@
         "CacheCluster": {
             "Type": "AWS::ElastiCache::CacheCluster",
             "Properties": {
+                "ClusterName" : "CacheCluster",
                 "AutoMinorVersionUpgrade": "true",
                 "Engine": "memcached",
                 "CacheNodeType": "cache.t2.micro",
@@ -312,6 +316,7 @@
         "GitHubSourceCode": {
             "Type": "AWS::ElastiCache::CacheCluster",
             "Properties": {
+                "ClusterName" : "GitHubSourceCode",
                 "AutoMinorVersionUpgrade": "true",
                 "Engine": "memcached",
                 "CacheNodeType": "cache.t2.micro",
