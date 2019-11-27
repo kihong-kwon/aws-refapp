@@ -1,4 +1,4 @@
-# Spring Cloud AWS Reference App #
+# Spring Cloud AWS Reference App #[![Build Status](https://travis-ci.org/kihong-kwon/aws-refapp.svg?branch=master)](https://travis-ci.org/kihong-kwon/aws-refapp)
 This reference application acts as a showcase for the features provided by [Spring Cloud AWS] [Spring-Cloud-AWS].
 
 To check out the project and build it from source, do the following:

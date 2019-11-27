@@ -6,6 +6,9 @@ branches:
   only:
     - master
 
+env:
+  - RDS_PASSWORD=$RDS_PASSWORD
+
 cache:
   directories:
     - "$HOME/.m2"
