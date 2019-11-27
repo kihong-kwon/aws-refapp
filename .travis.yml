@@ -24,7 +24,6 @@ deploy:
     bucket: "net.kkh-study.aws-refapp"
     region: ap-northeast-1
     skip_cleanup: true
-    acl: public_read
     local_dir: deploy
     wait-until-deployed: true
     on:
