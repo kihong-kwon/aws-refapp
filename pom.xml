@@ -11,8 +11,8 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>org.springframework.cloud.aws.sample</groupId>
     <artifactId>spring-cloud-aws-reference-app</artifactId>
-    <packaging>war</packaging>
-    <version>1.0.0-BUILD</version>
+    <packaging>jar</packaging>
+    <version>1.0.0</version>
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
