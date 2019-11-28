@@ -38,7 +38,7 @@ public class GitHubSourceCodeProvider implements SourceCodeProvider {
     }
 
     @Override
-    @Cacheable(value = "GitHubSourceCode")
+    @Cacheable(value = "githubsourcecode")
     public SourceFile getSourceFileContent(String path) {
         @SuppressWarnings("unchecked")
         Map<String, String> result = this.restTemplate.getForObject(BASE_URL + path, Map.class);

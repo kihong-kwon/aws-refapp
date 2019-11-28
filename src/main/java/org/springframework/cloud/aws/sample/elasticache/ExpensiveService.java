@@ -27,7 +27,7 @@ import java.util.UUID;
 @Service
 public class ExpensiveService {
 
-    @Cacheable("CacheCluster")
+    @Cacheable("cachecluster")
     public String calculateExpensiveValue(String key){
         try {
             Thread.sleep(5000);
