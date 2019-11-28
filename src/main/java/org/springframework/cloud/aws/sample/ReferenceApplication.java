@@ -71,8 +71,8 @@ public class ReferenceApplication implements EmbeddedServletContainerCustomizer 
         public CacheManager createSimpleCacheManager() {
             SimpleCacheManager simpleCacheManager = new SimpleCacheManager();
             List<Cache> caches = new ArrayList<>(2);
-            caches.add(new ConcurrentMapCache("CacheCluster"));
-            caches.add(new ConcurrentMapCache("GitHubSourceCode"));
+            caches.add(new ConcurrentMapCache("cachecluster"));
+            caches.add(new ConcurrentMapCache("githubsourcecode"));
             simpleCacheManager.setCaches(caches);
 
             return simpleCacheManager;
@@ -84,7 +84,16 @@ public class ReferenceApplication implements EmbeddedServletContainerCustomizer 
     @EnableElastiCache
     @Profile("!local")
     protected static class ElastiCacheConfiguration {
+        @Bean
+        public CacheManager createSimpleCacheManager() {
+            SimpleCacheManager simpleCacheManager = new SimpleCacheManager();
+            List<Cache> caches = new ArrayList<>(2);
+            caches.add(new ConcurrentMapCache("cachecluster"));
+            caches.add(new ConcurrentMapCache("githubsourcecode"));
+            simpleCacheManager.setCaches(caches);
 
+            return simpleCacheManager;
+        }
     }
 
     @Bean
