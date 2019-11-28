@@ -17,24 +17,19 @@
 package org.springframework.cloud.aws.sample;
 
 import com.amazonaws.services.sns.AmazonSNS;
-import com.amazonaws.services.sqs.AmazonSQS;
+import com.amazonaws.services.sqs.AmazonSQSAsync;
 import org.springframework.boot.SpringApplication;
-import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
-import org.springframework.boot.context.embedded.ConfigurableEmbeddedServletContainer;
-import org.springframework.boot.context.embedded.EmbeddedServletContainerCustomizer;
-import org.springframework.boot.context.embedded.MimeMappings;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cache.Cache;
 import org.springframework.cache.CacheManager;
 import org.springframework.cache.annotation.EnableCaching;
 import org.springframework.cache.concurrent.ConcurrentMapCache;
 import org.springframework.cache.support.SimpleCacheManager;
 import org.springframework.cloud.aws.autoconfigure.cache.ElastiCacheAutoConfiguration;
-import org.springframework.cloud.aws.cache.config.annotation.EnableElastiCache;
 import org.springframework.cloud.aws.core.env.ResourceIdResolver;
 import org.springframework.cloud.aws.messaging.core.NotificationMessagingTemplate;
 import org.springframework.cloud.aws.messaging.core.QueueMessagingTemplate;
 import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Profile;
 import org.springframework.web.socket.config.annotation.EnableWebSocket;
@@ -45,21 +40,12 @@ import java.util.List;
 /**
  * @author Alain Sahli
  */
-@EnableAutoConfiguration(exclude = ElastiCacheAutoConfiguration.class)
-@Configuration
-@ComponentScan
+@SpringBootApplication(exclude = ElastiCacheAutoConfiguration.class)
 @EnableWebSocket
-public class ReferenceApplication implements EmbeddedServletContainerCustomizer {
+public class ReferenceApplication {
 
     public static void main(String[] args) {
         SpringApplication.run(ReferenceApplication.class, args);
-    }
-
-    @Override
-    public void customize(ConfigurableEmbeddedServletContainer container) {
-        MimeMappings mappings = new MimeMappings(MimeMappings.DEFAULT);
-        mappings.add("html", "text/html;charset=utf-8");
-        container.setMimeMappings(mappings);
     }
 
     @Configuration
@@ -87,7 +73,7 @@ public class ReferenceApplication implements EmbeddedServletContainerCustomizer 
     }
 
     @Bean
-    public QueueMessagingTemplate queueMessagingTemplate(AmazonSQS amazonSqs, ResourceIdResolver resourceIdResolver) {
+    public QueueMessagingTemplate queueMessagingTemplate(AmazonSQSAsync amazonSqs, ResourceIdResolver resourceIdResolver) {
         return new QueueMessagingTemplate(amazonSqs, resourceIdResolver);
     }
 
