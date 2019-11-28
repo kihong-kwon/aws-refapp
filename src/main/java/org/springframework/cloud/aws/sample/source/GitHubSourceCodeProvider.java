@@ -29,7 +29,7 @@ import java.util.Map;
 @Service
 public class GitHubSourceCodeProvider implements SourceCodeProvider {
 
-    private static final String BASE_URL = "https://api.github.com/repos/spring-cloud-samples/aws-refapp/contents/";
+    private static final String BASE_URL = "https://api.github.com/repos/kihong-kwon/aws-refapp/contents/";
 
     private final RestTemplate restTemplate;
 
